@@ -1,0 +1,186 @@
+body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f8ff;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+
+        .scene {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+
+      
+        .envelope {
+            position: absolute;
+            width: 300px;
+            height: 200px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            transform-style: preserve-3d;
+            z-index: 20;
+        }
+
+        .envelope-body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #ffd8a8;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform-origin: center top;
+            z-index: 10;
+        }
+
+        .envelope-flap {
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: 0;
+            left: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-bottom: 100px solid #FFCF95;
+            transform-origin: center bottom;
+            transform: rotateX(270deg);
+            z-index: 15;
+            transition: transform 1.5s ease-in-out;
+        }
+
+        .envelope-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: #ffac46;
+            border-radius: 5px;
+            z-index: 5;
+        }
+
+        .envelope.open .envelope-flap {
+            transform: rotateX(0deg);
+        }
+
+        .envelope.open {
+            animation: moveAway 1s ease-in-out 2s forwards;
+        }
+
+        @keyframes moveAway {
+            from {
+                transform: translate(-50%, -50%);
+                opacity: 1;
+            }
+            to {
+                transform: translate(-50%, 100%);
+                opacity: 0;
+            }
+        }
+
+        
+        .flower-container {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            animation: growFlower 1s ease-in-out 2.5s forwards;
+        }
+
+        @keyframes growFlower {
+            from {
+                transform: translate(-50%, -50%) scale(0);
+            }
+            to {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .center-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px;
+            height: 130px;
+            background-color: #FFF6F6;
+            border: 5px solid #EBB062;
+            border-radius: 17px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 10;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out 5.5s forwards;
+        }
+
+        .message-text {
+            color: #AE8045;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-size: 22px;
+        }
+
+        .petal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80px;
+            height: 150px;
+            transform-origin: center bottom;
+            opacity: 0;
+        }
+
+        .stem {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 100px;
+            background-color: #8B4513;
+            transform: translateX(-50%);
+            border-radius: 0 0 10px 10px;
+            z-index: -1;
+            transform-origin: center top;
+            opacity: 0;
+            animation: growStem 1.5s ease-in-out 5.3s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes growPetal {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -100%) scale(0.1);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -100%) scale(1) rotate(var(--rotation));
+            }
+        }
+
+        @keyframes growStem {
+            0% {
+                opacity: 0;
+                height: 0;
+                top: 50%;
+            }
+            100% {
+                opacity: 1;
+                height: 100px;
+                top: 75%;
+            }
+        }
